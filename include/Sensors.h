@@ -11,8 +11,6 @@ class Ultrasonic {
         float _distance;
     public:
         Ultrasonic(int trigger, int echo);
-        void init();
-        void update();
         float getDistance();
 };
 

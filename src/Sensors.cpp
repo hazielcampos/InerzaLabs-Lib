@@ -3,13 +3,11 @@
 Ultrasonic::Ultrasonic(int trigger, int echo) {
     _triggerPin = trigger;
     _echoPin = echo;
-};
-
-void Ultrasonic::init() {
     pinMode(_triggerPin, OUTPUT);
     pinMode(_echoPin, INPUT);
 };
-void Ultrasonic::update() {
+
+float Ultrasonic::getDistance() {
     digitalWrite(_triggerPin, LOW);
     delayMicroseconds(2);
     digitalWrite(_triggerPin, HIGH);
@@ -18,8 +16,5 @@ void Ultrasonic::update() {
 
     _duration = pulseIn(_echoPin, HIGH);
     _distance = (_duration * 0.0343) / 2;
-};
-
-float Ultrasonic::getDistance() {
     return _distance;
 };
