@@ -1,6 +1,6 @@
 {
   "name": "InerzaLabs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Libreria de control placas InerzaLabs",
   "keywords": "esp32, inerza, robotica",
   "authors": [
