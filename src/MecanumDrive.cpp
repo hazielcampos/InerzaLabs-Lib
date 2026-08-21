@@ -1,6 +1,6 @@
 #include "MecanumDrive.h"
 
-MecanumDrive::MecanumDrive(Motor frontLeftMotor, Motor frontRightMotor, Motor rearLeftMotor, Motor rearRightMotor)
+MecanumDrive::MecanumDrive(Motor& frontLeftMotor, Motor& frontRightMotor, Motor& rearLeftMotor, Motor& rearRightMotor)
     : _frontLeftMotor(frontLeftMotor), _frontRightMotor(frontRightMotor), _rearLeftMotor(rearLeftMotor), _rearRightMotor(rearRightMotor) {}
 
 void MecanumDrive::drive(int xSpeed, int ySpeed, int zRotation) {
@@ -19,4 +19,11 @@ void MecanumDrive::stop() {
     _frontRightMotor.stop();
     _rearLeftMotor.stop();
     _rearRightMotor.stop();
+}
+
+void MecanumDrive::update() {
+    _frontLeftMotor.update();
+    _frontRightMotor.update();
+    _rearLeftMotor.update();
+    _rearRightMotor.update();
 }

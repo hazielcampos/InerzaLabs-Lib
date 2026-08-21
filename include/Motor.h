@@ -20,19 +20,29 @@
 
 
 class Motor {
-    private:
-        char _channel;
-        int8_t _direction: 2;
-        int _rawSpeed;
-        int _pwmA;
-        int _pwmB;
+  private:
+    char _channel;
+    int _direction;
+    int _rawSpeed;
+    int _currentSpeed;        // Velocidad actual del motor
+    int _targetSpeed;         // Velocidad deseada
 
-    public:
-        Motor(char channel, bool invertDirection = false);
-        void setSpeed(int speed);
-        void invertDirection(bool direction);
-        void stop();
-        void activeStop();
+    int _pwmA;
+    int _pwmB;
+
+    unsigned long _lastRampTime; // Para control de tiempo no bloqueante
+    int _rampInterval;           // Tiempo en ms entre cada paso de la rampa
+
+    void applyPwm(int speed);
+
+  public:
+    Motor(char channel, bool invertDirection);
+    void setSpeed(int speed);         // Establece la velocidad objetivo
+    void setRampInterval(int ms);     // Permite ajustar la suavidad de la rampa
+    void update();                    // ¡OBLIGATORIO! Llamar en el loop()
+    void invertDirection(bool invert);
+    void stop();
+    void activeStop();
 };
 
 #endif

@@ -5,15 +5,16 @@
 
 class MecanumDrive {
     private:
-        Motor _frontLeftMotor;
-        Motor _frontRightMotor;
-        Motor _rearLeftMotor;
-        Motor _rearRightMotor;
+        Motor& _frontLeftMotor;
+        Motor& _frontRightMotor;
+        Motor& _rearLeftMotor;
+        Motor& _rearRightMotor;
 
     public:
-        MecanumDrive(Motor frontLeftMotor, Motor frontRightMotor, Motor rearLeftMotor, Motor rearRightMotor);
+        MecanumDrive(Motor& frontLeftMotor, Motor& frontRightMotor, Motor& rearLeftMotor, Motor& rearRightMotor);
         void drive(int xSpeed, int ySpeed, int zRotation);
         void stop();
+        void update();
 };
 
 #endif

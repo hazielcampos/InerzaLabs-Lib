@@ -21,8 +21,8 @@ void INetwork::update() {
     int packetSize = _udp.parsePacket();
     if (packetSize) {
         char buffer[256];
-        int len  = _udp.read(buffer, sizeof(buffer) - 1);
-        if(len>0) {
+        int len = _udp.read(buffer, sizeof(buffer) - 1);
+        if(len > 0) {
             buffer[len] = '\0';
         }
 
@@ -32,8 +32,14 @@ void INetwork::update() {
             String topic = msg.substring(0, separatorIndex);
             String payload = msg.substring(separatorIndex + 1);
 
+            // 1. Ejecutar callback específico del tópico si existe
             if(_subscriptions.count(topic) > 0) {
                 _subscriptions[topic](topic, payload);
+            }
+
+            // 2. Ejecutar callback comodín "*" si existe (evitando duplicar si el tópico era literalmente "*")
+            if(topic != "*" && _subscriptions.count("*") > 0) {
+                _subscriptions["*"](topic, payload);
             }
         }
     }

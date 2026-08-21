@@ -68,6 +68,6 @@ void INav::update() {
     // 5. Integración Yaw
     _yaw += finalGyroZ * dt;
 
-    if (_yaw > 180.0f) _yaw -= 360.0f;
-    if (_yaw < -180.0f) _yaw += 360.0f;
+    while (_yaw >= 360.0f) _yaw -= 360.0f;
+    while (_yaw < 0.0f)   _yaw += 360.0f;
 }
